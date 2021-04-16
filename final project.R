@@ -7,9 +7,8 @@ colnames(b)
 #finding distribution of data
 hist(b$perTotSG)
 #exponential distribution 
-#removing NAs from data
-library(tidyverse)
-c=b %>% drop_na()
+#removing rows with NAs from cover data
+c=b[-c(40,55,60,68,77,149,162),]
 #finding quantiles for total SG cover 
 quantile(c$perTotSG)
 #finding quantiles for species cover
@@ -17,3 +16,7 @@ quantile(c$perTha)
 quantile(c$perSyr)
 quantile(c$perOSG)
 #From most common to rare: Tha, Syr, OSG
+#adding leading 0's to date values 
+date=as.Date(c$Date,format="%m/%d/%Y") 
+date
+write.csv(x=c, file="processed_SG_data1.csv", row.names = F)
